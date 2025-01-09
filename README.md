@@ -1,8 +1,6 @@
 NCSA Mosaic
 ===========
 
-![Wikipedia viewed with Mosaic](https://github.com/downloads/yotann/ncsa-mosaic/wikipedia-screenshot.png "Wikipedia viewed with Mosaic")
-
 This is [NCSA Mosaic](https://en.wikipedia.org/wiki/Mosaic_(web_browser)), one
 of the first graphical web browsers. This version has barely been modified
 since the last official release, version 2.7 beta 6, in 1996. You may also be

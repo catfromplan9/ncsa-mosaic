@@ -1037,13 +1037,18 @@ char *mo_tmpnam (char *url)
   extern void MoCCIAddFileURLToList(char *, char *);
   char *tmp = (char *)malloc (sizeof (char) * L_tmpnam);
   char *tmp_dir = get_pref_string(eTMP_DIRECTORY);
+  if (!tmp_dir) {
+    tmp_dir = "/tmp";
+  }
 
-  tmpnam (tmp);
+  sprintf(tmp, "fileXXXXXX");
+  int fd = mkstemp(tmp);
 
   if (!tmp_dir)
     {
       /* Fast path. */
       if(url) MoCCIAddFileURLToList(tmp,url);
+      close(fd);
       return tmp;
     }
   else
@@ -1061,6 +1066,7 @@ char *mo_tmpnam (char *url)
       
       /* No luck, just punt. */
       if(url) MoCCIAddFileURLToList(tmp,url);
+      close(fd);
       return tmp;
 
     found_it:
@@ -1079,6 +1085,7 @@ char *mo_tmpnam (char *url)
 
       MoCCIAddFileURLToList(tmp,url);
       free (oldtmp);
+      close(fd);
       return tmp;
     }
 }

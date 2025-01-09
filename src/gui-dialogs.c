@@ -267,7 +267,7 @@ mo_status mo_save_window(mo_window *win, char *fname,
 
 	buf=my_strerror(errno);
 	if (!buf || !*buf || !strcmp(buf,"Error 0")) {
-		sprintf(tmpbuf,"Uknown Error" );
+		sprintf(tmpbuf,"Unknown Error" );
 		buf=tmpbuf;
 	}
 
@@ -634,7 +634,7 @@ static XmxCallback (savebinary_cancel_cb)
 
 	buf=my_strerror(errno);
 	if (!buf || !*buf || !strcmp(buf,"Error 0")) {
-		sprintf(tmpbuf,"Uknown Error" );
+		sprintf(tmpbuf,"Unknown Error" );
 		buf=tmpbuf;
 	}
 
@@ -2678,7 +2678,6 @@ char *url;
 	/* should I stay or should I go...du du dun da dun da da */
 	/*unlink(e->fileName); */
 
-	free(e->fileName);
 	free(e->url);
 	free(e);
 }
@@ -2747,18 +2746,19 @@ extern void AddChildProcessHandler(int, void (*)(), void *);
 		}
 
 	/* write out source to tmp file with .html extension */
-        sourceFileName = malloc(255);
-        strcpy(sourceFileName, tmpnam(NULL));
-        strcat(sourceFileName, ".html");
+        char template[] = "/tmp/fileXXXXXX";
+        int fd = mkstemp(template);
+        sourceFileName = template;
 
-	if (!(fp = fopen(sourceFileName,"w")))
+	if (fd == -1 || !(fp = fdopen(fd, "w")))
 	{
+                close(fd);
 		char *buf, *final, tmpbuf[80];
 		int final_len;
 
 		buf=my_strerror(errno);
 		if (!buf || !*buf || !strcmp(buf,"Error 0")) {
-			sprintf(tmpbuf,"Uknown Error" );
+			sprintf(tmpbuf,"Unknown Error" );
 			buf=tmpbuf;
 		}
 
@@ -2788,7 +2788,7 @@ extern void AddChildProcessHandler(int, void (*)(), void *);
 
 			buf=my_strerror(errno);
 			if (!buf || !*buf || !strcmp(buf,"Error 0")) {
-				sprintf(tmpbuf,"Uknown Error" );
+				sprintf(tmpbuf,"Unknown Error" );
 				buf=tmpbuf;
 			}
 

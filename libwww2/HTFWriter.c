@@ -513,7 +513,7 @@ PUBLIC HTStream* HTSaveAndExecute ARGS5(
                 ((strlen (pres->command) + 10 + 3*strlen(me->fnam)) * 
                  sizeof (char));
               
-              /* Cute.  pres->command will be something like "xv %s"; me->fnam
+              /* Cute.  pres->command will be something like "sxiv %s"; me->fnam
                  gets filled in as many times as appropriate.  */
               sprintf (command, pres->command, me->fnam, me->fnam, me->fnam);
               

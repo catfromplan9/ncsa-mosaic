@@ -1,13 +1,16 @@
 project(
     'ncsa-mosaic',
     'c',
-    version: '2.7b6-flatpak2'
+    version: '2.7'
 )
 
 cc = meson.get_compiler('c')
+add_project_arguments('-fpermissive', language: 'c')
 
 openmotif = cc.find_library('Xm', required: true)
 xmu = dependency('xmu')
+libpng = dependency('libpng')
+libjpeg = dependency('libjpeg')
 
 include_dir = include_directories('.')
 
